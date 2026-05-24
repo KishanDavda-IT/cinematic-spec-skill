@@ -11,10 +11,17 @@ No "approximately." No "something like." Every value is literal. Every class str
 ## Preview
 
 <p align="center">
-  <img src="preview.svg" alt="VOID — Personal Aesthetic Homepage" width="100%" />
+  <img src="preview.png" alt="VOID — Space Exploration Hero" width="100%" />
 </p>
 
-*Spec produced by cinematic-spec for input: "dark hero section with a big title, animated text, and a scroll indicator"*
+*Spec produced by cinematic-spec for the "Space Exploration Hero" design.*
+
+---
+
+## Examples
+
+- [Space Exploration Hero](examples/space-voyage-spec.md) — A cinematic dark-mode hero section with glassmorphism and animated typography.
+- [VOID Personal Aesthetic](examples/void-personal.md) (coming soon)
 
 ---
 
