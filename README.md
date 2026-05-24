@@ -1,253 +1,225 @@
-  ---
-  # cinematic-spec                                                                                                      
-  > Write frontend build prompts precise enough to reproduce a UI without design files.                                 
-  **cinematic-spec** is a structured prompt format for spec-ing out UI builds with exact Tailwind classes, animation
-  values, asset URLs, inline SVGs, and copy text. It turns rough design ideas into specification documents that any
-  developer — or AI — can build from, pixel-perfectly.
+# cinematic-spec
 
-  No "approximately." No "something like." Every value is literal. Every class string is verbatim. The output is a
-  **spec**, not a description.
+> Write frontend build prompts precise enough to reproduce a UI without design files.
 
-  ---
+**cinematic-spec** is a structured prompt format for spec-ing out UI builds with exact Tailwind classes, animation values, asset URLs, inline SVGs, and copy text. It turns rough design ideas into specification documents that any developer — or AI — can build from, pixel-perfectly.
 
-  ## Why
+No "approximately." No "something like." Every value is literal. Every class string is verbatim. The output is a **spec**, not a description.
 
-  Design handoff tools exist, but most UI work still happens from screenshots, Slack messages, and vague briefs like
-  "make it glassmorphic with some animations." That leaves builders guessing on colors, spacing, timing, and structure.
+---
 
-  cinematic-spec fills the gap between design intent and implementation. The output is dense enough that a competent
-  builder reads it top-down and builds without asking questions.
+## Preview
 
-  ---
+<p align="center">
+  <img src="preview.svg" alt="VOID — Personal Aesthetic Homepage" width="100%" />
+</p>
 
-  ## What It Looks Like
+*Spec produced by cinematic-spec for input: "dark hero section with a big title, animated text, and a scroll indicator"*
 
-  A cinematic-spec prompt follows this structure:
+---
 
+## Why
 
-  Build Prompt: [Name]
-  [One-sentence description]
+Design handoff tools exist, but most UI work still happens from screenshots, Slack messages, and vague briefs like "make it glassmorphic with some animations." That leaves builders guessing on colors, spacing, timing, and structure.
 
-  Tech stack (pinned, CDN-only)
-  Fonts
-  Design System / Global Utilities
-  Shared Components (defined once)
-  Page Sections
-    Background / Media
-    Layout Shell
-    Components (top to bottom)
-  Icons (inline SVGs)
-  Notes
+cinematic-spec fills the gap between design intent and implementation. The output is dense enough that a competent builder reads it top-down and builds without asking questions.
 
+---
 
-  Every section is concrete:
+## What It Looks Like
 
-  | Instead of | It writes |
-  |---|---|
-  | "Use a glassmorphism style" | Full `.glass-card` CSS block verbatim |
-  | "Add a slight delay" | `delay: 0.4` |
-  | "Something like Framer Motion" | Exact `motion.div` props |
-  | "A nice italic serif font" | `font-heading italic text-[5.5rem]` |
-  | "An arrow icon" | SVG path `d="M7 17L17 7 M7 7h10v10"` |
-  | "Fade the video in and out" | Full `fadeTo()` rAF spec with timing constants |
-  | "Use Tailwind for layout" | `flex items-center justify-between gap-4 px-8 lg:px-16` |
-  | "Approximate the spacing" | `mt-6 gap-6 p-5 w-[220px] rounded-[1.25rem]` |
+A cinematic-spec prompt follows this structure:
 
-  ---
+```
+Build Prompt: [Name]
+[One-sentence description]
 
-  ## Document Structure
+Tech stack (pinned, CDN-only)
+Fonts
+Design System / Global Utilities
+Shared Components (defined once)
+Page Sections
+  Background / Media
+  Layout Shell
+  Components (top to bottom)
+Icons (inline SVGs)
+Notes
+```
 
-  A complete spec is layered — global first, then section-by-section, then component-by-component, then behavior detail.
+Every section is concrete:
 
-  ### 1. Title Line
+| Instead of | It writes |
+|---|---|
+| "Use a glassmorphism style" | Full `.glass-card` CSS block verbatim |
+| "Add a slight delay" | `delay: 0.4` |
+| "Something like Framer Motion" | Exact `motion.div` props |
+| "A nice italic serif font" | `font-heading italic text-[5.5rem]` |
+| "An arrow icon" | SVG path `d="M7 17L17 7 M7 7h10v10"` |
+| "Fade the video in and out" | Full `fadeTo()` rAF spec with timing constants |
+| "Use Tailwind for layout" | `flex items-center justify-between gap-4 px-8 lg:px-16` |
+| "Approximate the spacing" | `mt-6 gap-6 p-5 w-[220px] rounded-[1.25rem]` |
 
+---
 
- ## Preview
+## Document Structure
 
-  <p align="center">
-    <img src="preview.svg" alt="VØID — Personal Aesthetic Homepage" width="100%" />
-  </p>
+A complete spec is layered — global first, then section-by-section, then component-by-component, then behavior detail.
 
-  > [Live demo →](./demo/index.html)
+### 1. Title Line
 
-  And here's the preview.svg content:
+```
+Build Prompt: VOID — Personal Aesthetic Homepage
+```
 
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
-    <defs>
-      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#c084fc"/>
-        <stop offset="50%" stop-color="#818cf8"/>
-        <stop offset="100%" stop-color="#67e8f9"/>
-      </linearGradient>
-      <linearGradient id="border" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
-        <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
-      </linearGradient>
-      <filter id="glow">
-        <feGaussianBlur stdDeviation="6" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-      <filter id="noise">
-        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-        <feColorMatrix type="saturate" values="0"/>
-      </filter>
-    </defs>
+One sentence: what the build produces at the highest level.
 
-    <!-- Background -->
-    <rect width="1200" height="800" fill="#000000"/>
+### 2. Tech Stack
 
-    <!-- Noise overlay -->
-    <rect width="1200" height="800" filter="url(#noise)" opacity="0.035"/>
+Pinned dependencies with full CDN tags, integrity hashes where available, framework wiring, and body/root defaults.
 
-    <!-- Ambient glow -->
-    <ellipse cx="600" cy="360" rx="350" ry="250" fill="rgba(124,58,237,0.08)"/>
-    <ellipse cx="400" cy="500" rx="200" ry="180" fill="rgba(34,211,238,0.04)"/>
+```html
+<script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/framer-motion@11.0.0/dist/framer-motion.js"></script>
+```
 
-    <!-- Navbar -->
-    <g opacity="0.5">
-      <!-- Glow dot -->
-      <circle cx="48" cy="32" r="3" fill="#a78bfa" filter="url(#glow)"/>
-      <text x="60" y="36" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.5)"
-  letter-spacing="2">VØID.SYS</text>
+### 3. Fonts
 
-      <text x="460" y="36" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.3)" letter-spacing="3">01.
-  ABOUT</text>
-      <text x="560" y="36" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.3)" letter-spacing="3">02.
-  WORK</text>
-      <text x="655" y="36" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.3)" letter-spacing="3">03.
-  CONTACT</text>
+Google Fonts import line, Tailwind `fontFamily` config, and usage notes per font.
 
-      <rect x="1095" y="20" width="60" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.08)"
-  stroke-width="1"/>
-      <text x="1106" y="36" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.5)" letter-spacing="2">PING
-  ↗</text>
-    </g>
+### 4. Design System / Global Utilities
 
-    <!-- Hero: VØID title -->
-    <text x="600" y="420" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="160"
-  letter-spacing="-6" fill="url(#grad)">VØID</text>
+Custom CSS classes with full verbatim CSS in fenced code blocks. One class = one code block. Pseudo-element variants included.
 
-    <!-- Subtitle -->
-    <text x="600" y="465" text-anchor="middle" font-family="monospace" font-size="12" fill="rgba(255,255,255,0.4)"
-  letter-spacing="4" text-transform="uppercase">PERSONAL AESTHETIC · DIGITAL VOID</text>
+```css
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  backdrop-filter: blur(12px);
+}
+```
 
-    <!-- Status line -->
-    <g opacity="0.3" transform="translate(600,500)">
-      <circle cx="-50" cy="-3" r="3" fill="#a78bfa" filter="url(#glow)"/>
-      <text x="-38" y="0" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.3)" letter-spacing="3">ONLINE ·
-   BUILDING</text>
-    </g>
+### 5. Shared Components
 
-    <!-- Scroll indicator -->
-    <g opacity="0.2" transform="translate(600,720)">
-      <text x="0" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.2)"
-  letter-spacing="4">SCROLL</text>
-      <line x1="0" y1="12" x2="0" y2="44" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-    </g>
+Reusable components defined once with behavior as numbered steps, timing constants, event handlers, and cleanup logic.
 
-    <!-- Glass card: About section (bottom-left hint) -->
-    <g transform="translate(60,560)">
-      <rect x="0" y="0" width="240" height="140" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)"
-  stroke-width="1"/>
-      <text x="20" y="30" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.25)" letter-spacing="3">01 /
-  ABOUT</text>
-      <rect x="20" y="48" width="180" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
-      <rect x="20" y="62" width="140" height="6" rx="3" fill="rgba(255,255,255,0.04)"/>
-      <rect x="20" y="76" width="160" height="6" rx="3" fill="rgba(255,255,255,0.04)"/>
-      <!-- Tags -->
-      <g transform="translate(20,100)">
-        <rect x="0" y="0" width="50" height="20" rx="10" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-        <text x="12" y="14" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)"
-  letter-spacing="1">DESIGN</text>
-        <rect x="58" y="0" width="75" height="20" rx="10" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-        <text x="68" y="14" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)"
-  letter-spacing="1">ENGINEERING</text>
-        <rect x="141" y="0" width="55" height="20" rx="10" fill="none" stroke="rgba(255,255,255,0.08)"
-  stroke-width="1"/>
-        <text x="151" y="14" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)"
-  letter-spacing="1">MOTION</text>
-      </g>
-    </g>
+### 6. Page Sections
 
-    <!-- Glass card: Project (bottom-right hint) -->
-    <g transform="translate(900,560)">
-      <rect x="0" y="0" width="240" height="140" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"
-  stroke-width="1"/>
-      <text x="20" y="28" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.15)"
-  letter-spacing="2">01</text>
-      <text x="20" y="56" font-family="sans-serif" font-size="18" font-weight="600"
-  fill="rgba(255,255,255,0.8)">Spectre</text>
-      <rect x="20" y="72" width="180" height="5" rx="2.5" fill="rgba(255,255,255,0.06)"/>
-      <rect x="20" y="83" width="140" height="5" rx="2.5" fill="rgba(255,255,255,0.04)"/>
-      <!-- Arrow icon -->
-      <g transform="translate(208,20)" opacity="0.4">
-        <line x1="0" y1="10" x2="10" y2="0" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        <polyline points="0,0 10,0 10,10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"
-  stroke-linejoin="round"/>
-      </g>
-      <!-- Tags -->
-      <g transform="translate(20,104)">
-        <rect x="0" y="0" width="40" height="18" rx="9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <text x="10" y="13" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)"
-  letter-spacing="1">REACT</text>
-        <rect x="48" y="0" width="42" height="18" rx="9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <text x="55" y="13" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)"
-  letter-spacing="1">WEBGL</text>
-        <rect x="98" y="0" width="34" height="18" rx="9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <text x="106" y="13" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)"
-  letter-spacing="1">GLSL</text>
-      </g>
-    </g>
+Each section specifies:
 
-    <!-- Stats row (bottom center) -->
-    <g transform="translate(370,580)">
-      <rect x="0" y="0" width="100" height="70" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)"
-  stroke-width="1"/>
-      <text x="50" y="32" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="700"
-  fill="url(#grad)">47</text>
-      <text x="50" y="52" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)"
-  letter-spacing="2">PROJECTS</text>
+- **Background / Media** — asset URL, positioning classes, inline style overrides, overlay treatment
+- **Layout Shell** — container classes, z-index map, flex/grid structure
+- **Components** — position/layout classes, children (element type, classes, text, icons, Framer Motion props), state/interaction behavior
 
-      <rect x="115" y="0" width="100" height="70" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)"
-  stroke-width="1"/>
-      <text x="165" y="35" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="700"
-  fill="url(#grad)">∞</text>
-      <text x="165" y="52" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)"
-  letter-spacing="2">LOOPS</text>
+### 7. Icons
 
-      <rect x="230" y="0" width="100" height="70" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)"
-  stroke-width="1"/>
-      <text x="280" y="32" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="700"
-  fill="url(#grad)">0</text>
-      <text x="280" y="52" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)"
-  letter-spacing="2">COMPROMISES</text>
-    </g>
+Inline SVGs with verbatim `viewBox`, path `d` attributes, `strokeWidth`, `fill`, and `linecap`.
 
-    <!-- Footer -->
-    <text x="600" y="778" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.1)"
-  letter-spacing="4">© 2026 VOID</text>
-  </svg>
+### 8. Notes
 
+Implementation gotchas, browser compatibility caveats, intentional-looking-but-correct behaviors.
 
-  Notes
+---
 
-  - NoiseCanvas runs at 12fps via setInterval, not raw rAF — avoids 60fps waste on a 256×256 random fill.
-  - mix-blend-mode: screen requires pure #000000 body background. Any deviation makes noise invisible.
-  - The Ø in "VØID" is Unicode U+00D8 (Latin Capital Letter O with Stroke), not a zero. Space Grotesk supports it.
-  - Framer Motion filter animations require the motion component — CSS transitions don't interpolate blur as smoothly.
-  - backdrop-filter: blur() has known Firefox performance issues with large scroll areas. Reduce to 8px if janky.
+## Formatting Rules
 
-  ---
-  Contributing
+### Class Strings
 
-  1. Fork the repo
-  2. Create a branch (git checkout -b feat/new-section)
-  3. Make changes to SKILL.md or add examples in examples/
-  4. Open a PR with a clear description of what changed and why
+Write Tailwind classes exactly as they appear. No line breaks mid-class-string. No paraphrasing.
 
-  ---
-  License
+### Colors and Values
 
-  MIT
+Always literal:
+- `rgba(255,255,255,0.01)` not "near-transparent white"
+- `text-[5.5rem]` not "roughly 88px"
+- `delay: 0.4` not "slight delay"
+- `tracking-[-4px]` not "tight tracking"
 
-  ---
+### Text Copy
+
+All UI copy wrapped in quotes. Never paraphrased.
+
+### Animation Specs
+
+Full object form with `initial`, `animate`, `transition` (including `delay`). Keyframe arrays include `times`.
+
+```js
+initial: { filter: 'blur(10px)', opacity: 0, y: 20 }
+animate: { filter: 'blur(0px)', opacity: 1, y: 0 }
+transition: { duration: 0.7, delay: 0.4, ease: 'easeOut' }
+```
+
+### SVG Path Data
+
+Inline verbatim. Never describe an icon in prose when path data is available.
+
+### Behavior Specs
+
+Numbered steps. Constants named upfront. Variable names in code-style.
+
+---
+
+## Quality Checklist
+
+Before finalizing a build prompt:
+
+- [ ] Every dependency has a pinned version
+- [ ] Every color/opacity/size is a literal value
+- [ ] Every component has exact class strings
+- [ ] All text copy is quoted verbatim
+- [ ] All animations have `initial` + `animate` + `transition` (with `delay`)
+- [ ] Shared components defined once, not re-described per use
+- [ ] SVG paths are literal `d` attribute strings
+- [ ] Background media URLs are full absolute URLs
+- [ ] A Notes section exists for implementation caveats
+- [ ] DOM order matches visual order (top to bottom, left to right)
+
+---
+
+## Installation
+
+### OpenClaude / Claude Code
+
+```bash
+git clone https://github.com/KishanDavda-IT/cinematic-spec-skill.git ~/.claude/skills/cinematic-spec
+```
+
+The skill auto-registers from its `SKILL.md` frontmatter. No config needed.
+
+### Manual Use
+
+Copy `SKILL.md` content and paste it into your system prompt or project instructions. The format is self-contained — no scripts, no dependencies.
+
+---
+
+## Usage
+
+Trigger phrases:
+
+- "write a build prompt"
+- "spec out a landing page"
+- "turn this design into a prompt"
+- "make a prompt for a dev to build"
+- "cinematic prompt"
+- "build spec"
+- "format this UI as a spec"
+
+The skill handles both directions:
+
+1. **From scratch** — describe a UI, get a complete spec
+2. **From draft** — paste a rough prompt, get it back with exact values, class strings, and animation specs filled in
+
+---
+
+## Contributing
+
+1. Fork the repo
+2. Create a branch (`git checkout -b feat/new-section`)
+3. Make changes to `SKILL.md` or add examples in `examples/`
+4. Open a PR with a clear description of what changed and why
+
+---
+
+## License
+
+MIT
