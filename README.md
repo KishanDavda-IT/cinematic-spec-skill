@@ -62,244 +62,172 @@
   ### 1. Title Line
 
 
-  Build Prompt: VØID — Personal Aesthetic Homepage
+ ## Preview
+
+  <p align="center">
+    <img src="preview.svg" alt="VØID — Personal Aesthetic Homepage" width="100%" />
+  </p>
+
+  > [Live demo →](./demo/index.html)
+
+  And here's the preview.svg content:
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#c084fc"/>
+        <stop offset="50%" stop-color="#818cf8"/>
+        <stop offset="100%" stop-color="#67e8f9"/>
+      </linearGradient>
+      <linearGradient id="border" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+      </linearGradient>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="6" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1200" height="800" fill="#000000"/>
+
+    <!-- Noise overlay -->
+    <rect width="1200" height="800" filter="url(#noise)" opacity="0.035"/>
+
+    <!-- Ambient glow -->
+    <ellipse cx="600" cy="360" rx="350" ry="250" fill="rgba(124,58,237,0.08)"/>
+    <ellipse cx="400" cy="500" rx="200" ry="180" fill="rgba(34,211,238,0.04)"/>
+
+    <!-- Navbar -->
+    <g opacity="0.5">
+      <!-- Glow dot -->
+      <circle cx="48" cy="32" r="3" fill="#a78bfa" filter="url(#glow)"/>
+      <text x="60" y="36" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.5)"
+  letter-spacing="2">VØID.SYS</text>
+
+      <text x="460" y="36" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.3)" letter-spacing="3">01.
+  ABOUT</text>
+      <text x="560" y="36" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.3)" letter-spacing="3">02.
+  WORK</text>
+      <text x="655" y="36" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.3)" letter-spacing="3">03.
+  CONTACT</text>
+
+      <rect x="1095" y="20" width="60" height="24" rx="12" fill="none" stroke="rgba(255,255,255,0.08)"
+  stroke-width="1"/>
+      <text x="1106" y="36" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.5)" letter-spacing="2">PING
+  ↗</text>
+    </g>
+
+    <!-- Hero: VØID title -->
+    <text x="600" y="420" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="160"
+  letter-spacing="-6" fill="url(#grad)">VØID</text>
+
+    <!-- Subtitle -->
+    <text x="600" y="465" text-anchor="middle" font-family="monospace" font-size="12" fill="rgba(255,255,255,0.4)"
+  letter-spacing="4" text-transform="uppercase">PERSONAL AESTHETIC · DIGITAL VOID</text>
+
+    <!-- Status line -->
+    <g opacity="0.3" transform="translate(600,500)">
+      <circle cx="-50" cy="-3" r="3" fill="#a78bfa" filter="url(#glow)"/>
+      <text x="-38" y="0" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.3)" letter-spacing="3">ONLINE ·
+   BUILDING</text>
+    </g>
+
+    <!-- Scroll indicator -->
+    <g opacity="0.2" transform="translate(600,720)">
+      <text x="0" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.2)"
+  letter-spacing="4">SCROLL</text>
+      <line x1="0" y1="12" x2="0" y2="44" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+    </g>
+
+    <!-- Glass card: About section (bottom-left hint) -->
+    <g transform="translate(60,560)">
+      <rect x="0" y="0" width="240" height="140" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)"
+  stroke-width="1"/>
+      <text x="20" y="30" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.25)" letter-spacing="3">01 /
+  ABOUT</text>
+      <rect x="20" y="48" width="180" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+      <rect x="20" y="62" width="140" height="6" rx="3" fill="rgba(255,255,255,0.04)"/>
+      <rect x="20" y="76" width="160" height="6" rx="3" fill="rgba(255,255,255,0.04)"/>
+      <!-- Tags -->
+      <g transform="translate(20,100)">
+        <rect x="0" y="0" width="50" height="20" rx="10" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <text x="12" y="14" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)"
+  letter-spacing="1">DESIGN</text>
+        <rect x="58" y="0" width="75" height="20" rx="10" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <text x="68" y="14" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)"
+  letter-spacing="1">ENGINEERING</text>
+        <rect x="141" y="0" width="55" height="20" rx="10" fill="none" stroke="rgba(255,255,255,0.08)"
+  stroke-width="1"/>
+        <text x="151" y="14" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.3)"
+  letter-spacing="1">MOTION</text>
+      </g>
+    </g>
+
+    <!-- Glass card: Project (bottom-right hint) -->
+    <g transform="translate(900,560)">
+      <rect x="0" y="0" width="240" height="140" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"
+  stroke-width="1"/>
+      <text x="20" y="28" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.15)"
+  letter-spacing="2">01</text>
+      <text x="20" y="56" font-family="sans-serif" font-size="18" font-weight="600"
+  fill="rgba(255,255,255,0.8)">Spectre</text>
+      <rect x="20" y="72" width="180" height="5" rx="2.5" fill="rgba(255,255,255,0.06)"/>
+      <rect x="20" y="83" width="140" height="5" rx="2.5" fill="rgba(255,255,255,0.04)"/>
+      <!-- Arrow icon -->
+      <g transform="translate(208,20)" opacity="0.4">
+        <line x1="0" y1="10" x2="10" y2="0" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <polyline points="0,0 10,0 10,10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"
+  stroke-linejoin="round"/>
+      </g>
+      <!-- Tags -->
+      <g transform="translate(20,104)">
+        <rect x="0" y="0" width="40" height="18" rx="9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <text x="10" y="13" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)"
+  letter-spacing="1">REACT</text>
+        <rect x="48" y="0" width="42" height="18" rx="9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <text x="55" y="13" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)"
+  letter-spacing="1">WEBGL</text>
+        <rect x="98" y="0" width="34" height="18" rx="9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <text x="106" y="13" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.2)"
+  letter-spacing="1">GLSL</text>
+      </g>
+    </g>
+
+    <!-- Stats row (bottom center) -->
+    <g transform="translate(370,580)">
+      <rect x="0" y="0" width="100" height="70" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)"
+  stroke-width="1"/>
+      <text x="50" y="32" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="700"
+  fill="url(#grad)">47</text>
+      <text x="50" y="52" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)"
+  letter-spacing="2">PROJECTS</text>
+
+      <rect x="115" y="0" width="100" height="70" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)"
+  stroke-width="1"/>
+      <text x="165" y="35" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="700"
+  fill="url(#grad)">∞</text>
+      <text x="165" y="52" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)"
+  letter-spacing="2">LOOPS</text>
+
+      <rect x="230" y="0" width="100" height="70" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)"
+  stroke-width="1"/>
+      <text x="280" y="32" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="700"
+  fill="url(#grad)">0</text>
+      <text x="280" y="52" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.25)"
+  letter-spacing="2">COMPROMISES</text>
+    </g>
+
+    <!-- Footer -->
+    <text x="600" y="778" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.1)"
+  letter-spacing="4">© 2026 VOID</text>
+  </svg>
 
-
-  One sentence: what the build produces at the highest level.
-
-  ### 2. Tech Stack
-
-  Pinned dependencies with full CDN tags, integrity hashes where available, framework wiring, and body/root defaults.
-
-  ```html
-  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/framer-motion@11.0.0/dist/framer-motion.js"></script>
-
-  3. Fonts
-
-  Google Fonts import line, Tailwind fontFamily config, and usage notes per font.
-
-  4. Design System / Global Utilities
-
-  Custom CSS classes with full verbatim CSS in fenced code blocks. One class = one code block. Pseudo-element variants
-  included.
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 1rem;
-    backdrop-filter: blur(12px);
-  }
-
-  5. Shared Components
-
-  Reusable components defined once with behavior as numbered steps, timing constants, event handlers, and cleanup logic.
-
-  6. Page Sections
-
-  Each section specifies:
-
-  - Background / Media — asset URL, positioning classes, inline style overrides, overlay treatment
-  - Layout Shell — container classes, z-index map, flex/grid structure
-  - Components — position/layout classes, children (element type, classes, text, icons, Framer Motion props),
-  state/interaction behavior
-
-  7. Icons
-
-  Inline SVGs with verbatim viewBox, path d attributes, strokeWidth, fill, and linecap.
-
-  8. Notes
-
-  Implementation gotchas, browser compatibility caveats, intentional-looking-but-correct behaviors.
-
-  ---
-  Formatting Rules
-
-  Class Strings
-
-  Write Tailwind classes exactly as they appear. No line breaks mid-class-string. No paraphrasing.
-
-  Colors and Values
-
-  Always literal:
-  - rgba(255,255,255,0.01) not "near-transparent white"
-  - text-[5.5rem] not "roughly 88px"
-  - delay: 0.4 not "slight delay"
-  - tracking-[-4px] not "tight tracking"
-
-  Text Copy
-
-  All UI copy wrapped in quotes. Never paraphrased.
-
-  Animation Specs
-
-  Full object form with initial, animate, transition (including delay). Keyframe arrays include times.
-
-  initial: { filter: 'blur(10px)', opacity: 0, y: 20 }
-  animate: { filter: 'blur(0px)', opacity: 1, y: 0 }
-  transition: { duration: 0.7, delay: 0.4, ease: 'easeOut' }
-
-  SVG Path Data
-
-  Inline verbatim. Never describe an icon in prose when path data is available.
-
-  Behavior Specs
-
-  Numbered steps. Constants named upfront. Variable names in code-style.
-
-  ---
-  Quality Checklist
-
-  Before finalizing a build prompt:
-
-  - Every dependency has a pinned version
-  - Every color/opacity/size is a literal value
-  - Every component has exact class strings
-  - All text copy is quoted verbatim
-  - All animations have initial + animate + transition (with delay)
-  - Shared components defined once, not re-described per use
-  - SVG paths are literal d attribute strings
-  - Background media URLs are full absolute URLs
-  - A Notes section exists for implementation caveats
-  - DOM order matches visual order (top to bottom, left to right)
-
-  ---
-  Installation
-
-  OpenClaude / Claude Code
-
-  git clone https://github.com/YOUR_USERNAME/cinematic-spec ~/.claude/skills/cinematic-spec
-
-  The skill auto-registers from its SKILL.md frontmatter. No config needed.
-
-  Manual Use
-
-  Copy SKILL.md content and paste it into your system prompt or project instructions. The format is self-contained — no
-  scripts, no dependencies.
-
-  ---
-  Usage
-
-  Trigger phrases:
-
-  - "write a build prompt"
-  - "spec out a landing page"
-  - "turn this design into a prompt"
-  - "make a prompt for a dev to build"
-  - "cinematic prompt"
-  - "build spec"
-  - "format this UI as a spec"
-
-  The skill handles both directions:
-
-  1. From scratch — describe a UI, get a complete spec
-  2. From draft — paste a rough prompt, get it back with exact values, class strings, and animation specs filled in
-
-  ---
-  Example Output
-
-  Here's what the skill produces for a simple input:
-
-  Input: "dark hero section with a big title, some animated text, and a scroll indicator"
-
-  Output:
-
-  ---
-  Build Prompt: VØID — Personal Aesthetic Homepage
-
-  A single-page dark-matter-themed personal site with animated canvas noise texture, glassmorphism cards, and
-  scroll-driven reveals on a deep-black canvas.
-
-  Tech stack (pinned, CDN-only)
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/framer-motion@11.0.0/dist/framer-motion.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
-
-  Wiring:
-  const { useState, useEffect, useRef, useCallback } = React;
-  const { motion, useInView, useScroll, useTransform } = window["framer-motion"];
-
-  Body defaults: background: #000000; margin: 0; overflow-x: hidden;
-  Mount point: <div id="root"></div>, Babel transpiles JSX via type="text/babel".
-
-  Fonts
-
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght
-  @300;400;500&display=swap" rel="stylesheet">
-
-  Tailwind config:
-  fontFamily: {
-    sans: ['"Space Grotesk"', 'sans-serif'],
-    mono: ['"JetBrains Mono"', 'monospace'],
-  }
-
-  - Space Grotesk — all body text, headings, nav. Never italic.
-  - JetBrains Mono — labels, tags, metadata. Always uppercase when used as labels.
-
-  Design System
-
-  .noise-canvas:
-  .noise-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.035;
-    mix-blend-mode: screen;
-  }
-
-  .glass-card:
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 1rem;
-    backdrop-filter: blur(12px);
-  }
-
-  .text-gradient:
-  .text-gradient {
-    background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #67e8f9 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  Hero Section
-
-  Background: Pure #000000. NoiseCanvas overlay.
-  Layout: min-h-screen flex flex-col items-center justify-center relative z-10
-
-  Hero Title:
-  - <motion.h1 className="text-gradient font-sans font-bold text-[4.5rem] md:text-[7rem] lg:text-[9rem] leading-[0.9]
-  tracking-[-0.04em] select-none">
-  - Text: "VØID"
-  - initial: { opacity: 0, filter: 'blur(20px)', scale: 0.95 }
-  - animate: { opacity: 1, filter: 'blur(0px)', scale: 1 }
-  - transition: { duration: 1.2, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }
-
-  Subtitle:
-  - <motion.p className="font-mono text-[0.8rem] md:text-[0.9rem] text-white/40 tracking-[0.25em] uppercase mt-6">
-  - Text: "personal aesthetic · digital void"
-  - initial: { opacity: 0, y: 20 }
-  - animate: { opacity: 1, y: 0 }
-  - transition: { duration: 0.8, delay: 0.8, ease: 'easeOut' }
-
-  Scroll Indicator:
-  - <motion.div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-  - Text: "scroll"
-  - Line: animate: { opacity: [0.3, 0.8, 0.3], scaleY: [0.6, 1, 0.6] }
-  - transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
-
-  Icons (inline SVGs)
-
-  ArrowUpRight:
-  - viewBox: "0 0 24 24", width: "16", height: "16"
-  - stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round"
-  - path d="M7 17L17 7"
-  - path d="M7 7h10v10"
 
   Notes
 
