@@ -21,7 +21,7 @@ No "approximately." No "something like." Every value is literal. Every class str
 ## Examples
 
 - [Space Exploration Hero](examples/space-voyage-spec.md) — A cinematic dark-mode hero section with glassmorphism and animated typography.
-- [VOID Personal Aesthetic](examples/void-personal.md) (coming soon)
+
 
 ---
 
